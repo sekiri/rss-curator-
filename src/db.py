@@ -181,19 +181,49 @@ def update_feed_status(feed_id: int, status: str, db_path: Path | str = DB_PATH)
         conn.commit()
 
 
-def get_unscored_articles(db_path: Path | str = DB_PATH) -> List[sqlite3.Row]:
-    """類似度スコアが未計算（NULL）の記事を取得する。"""
+def get_unscored_articles(rescore_all: bool = False, db_path: Path | str = DB_PATH) -> List[sqlite3.Row]:
+    """
+    スコアリング対象の記事を取得する。
+    rescore_all=True の場合は全記事を取得し、False の場合は未計算（NULL）記事のみ取得する。
+    """
+    with get_connection(db_path) as conn:
+        cursor = conn.cursor()
+        if rescore_all:
+            cursor.execute(
+                """
+                SELECT id, feed_id, guid, title, link, published_at, content_snippet
+                FROM articles
+                ORDER BY id ASC
+                """
+            )
+        else:
+            cursor.execute(
+                """
+                SELECT id, feed_id, guid, title, link, published_at, content_snippet
+                FROM articles
+                WHERE similarity_score IS NULL
+                ORDER BY id ASC
+                """
+            )
+        return cursor.fetchall()
+
+
+def recalculate_feed_hit_counts(db_path: Path | str = DB_PATH) -> None:
+    """各フィードの hit_count を現在の is_curated=1 の実件数に基づいて再集計・更新する。"""
     with get_connection(db_path) as conn:
         cursor = conn.cursor()
         cursor.execute(
             """
-            SELECT id, feed_id, guid, title, link, published_at, content_snippet
-            FROM articles
-            WHERE similarity_score IS NULL
-            ORDER BY id ASC
+            UPDATE feeds
+            SET hit_count = (
+                SELECT COUNT(*)
+                FROM articles
+                WHERE articles.feed_id = feeds.id
+                  AND articles.is_curated = 1
+            )
             """
         )
-        return cursor.fetchall()
+        conn.commit()
 
 
 def update_article_score(

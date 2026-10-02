@@ -32,6 +32,7 @@ def run_pipeline(
     opml_path: Path | str = SEEDS_OPML_PATH,
     output_path: Path | str = OUTPUT_FEED_PATH,
     threshold: float = SIMILARITY_THRESHOLD,
+    rescore_all: bool = False,
 ) -> None:
     """フルパイプラインを実行する。"""
     logger.info("==========================================")
@@ -58,8 +59,8 @@ def run_pipeline(
     logger.info(f"Crawled {crawl_res['feeds_processed']} feeds, fetched {crawl_res['new_articles']} new articles.")
 
     # 5. スコアリング
-    logger.info(f"--- Step 3: Scoring Unevaluated Articles (Threshold={threshold}) ---")
-    score_res = score_articles(db_path=db_path, threshold=threshold)
+    logger.info(f"--- Step 3: Scoring Articles (Threshold={threshold}, Rescore All={rescore_all}) ---")
+    score_res = score_articles(db_path=db_path, threshold=threshold, rescore_all=rescore_all)
     logger.info(f"Scored {score_res['processed']} articles, curated {score_res['curated']} articles.")
 
     # 6. フィード刈り取り（プルーニング）
@@ -104,6 +105,17 @@ def main() -> None:
         help="Score unscored articles and curate matches",
     )
     parser.add_argument(
+        "--rescore",
+        action="store_true",
+        help="Recalculate similarity scores for all existing articles",
+    )
+    parser.add_argument(
+        "--threshold",
+        type=float,
+        default=SIMILARITY_THRESHOLD,
+        help=f"Similarity threshold for curation (default: {SIMILARITY_THRESHOLD})",
+    )
+    parser.add_argument(
         "--prune",
         action="store_true",
         help="Prune underperforming feeds (mark as dormant)",
@@ -131,13 +143,14 @@ def main() -> None:
             args.update_bookmarks,
             args.crawl,
             args.score,
+            args.rescore,
             args.prune,
             args.generate,
         ]
     )
 
     if args.run or not has_specific_flag:
-        run_pipeline()
+        run_pipeline(threshold=args.threshold, rescore_all=args.rescore)
         return
 
     if args.import_opml:
@@ -149,8 +162,11 @@ def main() -> None:
     if args.crawl:
         crawl_all(db_path=DB_PATH)
 
+    if args.rescore:
+        score_articles(db_path=DB_PATH, threshold=args.threshold, rescore_all=True)
+
     if args.score:
-        score_articles(db_path=DB_PATH)
+        score_articles(db_path=DB_PATH, threshold=args.threshold, rescore_all=False)
 
     if args.prune:
         prune_feeds(db_path=DB_PATH)

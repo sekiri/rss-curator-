@@ -139,20 +139,19 @@ def parse_datetime_safe(dt_str: str) -> datetime:
         return datetime.now(timezone.utc).replace(tzinfo=None)
 
 
-def get_user_profile_vector(
+def get_bookmark_embeddings_and_weights(
     db_path: Path | str = DB_PATH,
     half_life_days: float = TIME_DECAY_HALF_LIFE_DAYS,
-) -> Optional[np.ndarray]:
+) -> Tuple[Optional[np.ndarray], Optional[np.ndarray]]:
     """
-    DB内のブックマーク群から時間減衰（Time Decay）を適用した統合ユーザー関心ベクトルを算出する。
-    重み: w_i = 2^(-(経過日数 / half_life_days))
-    統合ベクトル: V_user = normalize(sum(w_i * v_i))
-    ブックマークが存在しない場合は None を返す。
+    DB内のブックマーク群からベクトル配列と時間減衰（Time Decay）重み配列を取得する。
+    戻り値: (embeddings: shape (N, D), weights: shape (N,))
+    ブックマークが存在しない場合は (None, None) を返す。
     """
     rows = get_bookmarks(db_path)
     if not rows:
-        logger.warning("No bookmarks in database. Cannot create user profile vector.")
-        return None
+        logger.warning("No bookmarks in database.")
+        return None, None
 
     vectors: List[np.ndarray] = []
     weights: List[float] = []
@@ -176,11 +175,23 @@ def get_user_profile_vector(
         weights.append(weight)
 
     if not vectors:
+        return None, None
+
+    stacked_vectors = np.stack(vectors, axis=0).astype(np.float32)  # (N, D)
+    weights_arr = np.array(weights, dtype=np.float32)  # (N,)
+    return stacked_vectors, weights_arr
+
+
+def get_user_profile_vector(
+    db_path: Path | str = DB_PATH,
+    half_life_days: float = TIME_DECAY_HALF_LIFE_DAYS,
+) -> Optional[np.ndarray]:
+    """
+    DB内のブックマーク群から時間減衰（Time Decay）を適用した統合ユーザー関心ベクトルを算出する。
+    （後方互換性のために維持）
+    """
+    stacked_vectors, weights_arr = get_bookmark_embeddings_and_weights(db_path, half_life_days)
+    if stacked_vectors is None or weights_arr is None:
         return None
-
-    # 重み付き加算
-    stacked_vectors = np.stack(vectors, axis=0)  # (N, D)
-    weights_arr = np.array(weights, dtype=np.float32)[:, np.newaxis]  # (N, 1)
-
-    combined_vec = np.sum(stacked_vectors * weights_arr, axis=0)
+    combined_vec = np.sum(stacked_vectors * weights_arr[:, np.newaxis], axis=0)
     return normalize_vector(combined_vec)

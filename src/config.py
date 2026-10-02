@@ -16,8 +16,8 @@ OUTPUT_FEED_PATH = DOCS_DIR / "curated.xml"
 # モデル設定
 EMBEDDING_MODEL_NAME = "paraphrase-multilingual-MiniLM-L12-v2"
 
-# スコアリング設定
-SIMILARITY_THRESHOLD = 0.65
+# スコアリング設定（Max-similarity方式: 0.45〜0.50程度が最適）
+SIMILARITY_THRESHOLD = 0.45
 TIME_DECAY_HALF_LIFE_DAYS = 30.0  # ブックマークの時間減衰半減期（日）
 
 # フィードプルーニング設定
@@ -26,7 +26,7 @@ PRUNE_MIN_HIT_RATE = 0.02
 
 # フィード出力設定
 FEED_TITLE = "Personal Tailored Feed"
-FEED_LINK = "https://example.com/rss-curator/curated.xml"
+FEED_LINK = "https://sekiri.github.io/rss-curator-/curated.xml"
 FEED_DESCRIPTION = "Curated RSS feed generated based on user interest embeddings"
 CURATED_DAYS_LIMIT = 7
 MAX_CURATED_ITEMS = 50

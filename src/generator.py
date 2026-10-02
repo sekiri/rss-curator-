@@ -64,11 +64,13 @@ def generate_rss_feed(
         score_prefix = f"[Relevance: {score:.2f}] " if score is not None else ""
         description = f"{score_prefix}{art['content_snippet'] or ''}"
 
+        guid_val = art["guid"] or art["link"] or f"article-{art['id']}"
+        is_url = bool(guid_val.startswith("http://") or guid_val.startswith("https://"))
         item = rfeed.Item(
             title=art["title"] or "Untitled Article",
             link=art["link"] or "",
             description=description,
-            guid=rfeed.Guid(art["guid"]),
+            guid=rfeed.Guid(guid_val, isPermaLink=is_url),
             pubDate=pub_dt,
         )
         rss_items.append(item)
