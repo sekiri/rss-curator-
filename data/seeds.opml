@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="2.0">
+  <head>
+    <title>Seed RSS Feeds</title>
+  </head>
+  <body>
+    <outline text="Technology &amp; AI">
+      <outline text="Hacker News Frontpage" title="Hacker News" type="rss" xmlUrl="https://news.ycombinator.com/rss" htmlUrl="https://news.ycombinator.com" />
+      <outline text="Hugging Face Blog" title="Hugging Face Blog" type="rss" xmlUrl="https://huggingface.co/blog/feed.xml" htmlUrl="https://huggingface.co/blog" />
+      <outline text="GitHub Blog" title="GitHub Blog" type="rss" xmlUrl="https://github.blog/feed/" htmlUrl="https://github.blog" />
+      <outline text="Zenn Tech Topics" title="Zenn" type="rss" xmlUrl="https://zenn.dev/feed" htmlUrl="https://zenn.dev" />
+    </outline>
+  </body>
+</opml>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<opml version="1.0">
+    <head>
+        <title>s subscriptions in feedly Cloud</title>
+    </head>
+    <body>
+        <outline text="Tech" title="Tech">
+            <outline type="rss" text="テクノエッジ TechnoEdge" title="テクノエッジ TechnoEdge" xmlUrl="https://www.techno-edge.net/rss20/index.rdf" htmlUrl="https://www.techno-edge.net/"/>
+            <outline type="rss" text="GIGAZINE" title="GIGAZINE" xmlUrl="http://feed.rssad.jp/rss/gigazine/rss_2.0" htmlUrl="https://gigazine.net/"/>
+            <outline type="rss" text="WirelessWire &amp; Schrödinger's" title="WirelessWire &amp; Schrödinger's" xmlUrl="https://wirelesswire.jp/feed/" htmlUrl="https://wirelesswire.jp"/>
+        </outline>
+        <outline text="Anesthesiology" title="Anesthesiology">
+            <outline type="rss" text="8年目麻酔科医が後輩に伝えたいことを書くブログ" title="8年目麻酔科医が後輩に伝えたいことを書くブログ" xmlUrl="http://anesthfow.exblog.jp/index.xml" htmlUrl="http://anesthfow.exblog.jp"/>
+            <outline type="rss" text="ゴートゥ ますいかい" title="ゴートゥ ますいかい" xmlUrl="http://hakushoukai.blog.shinobi.jp/RSS/" htmlUrl="http://hakushoukai.blog.shinobi.jp/"/>
+            <outline type="rss" text="驚異のアニヲタ社会復帰の予備" title="驚異のアニヲタ社会復帰の予備" xmlUrl="http://d.hatena.ne.jp/MikuHatsune/rss" htmlUrl="https://mikuhatsune.hatenadiary.com/"/>
+            <outline type="rss" text="Acta Anaesthesiologica Scandinavica" title="Acta Anaesthesiologica Scandinavica" xmlUrl="http://www3.interscience.wiley.com/rss/journal/118481009" htmlUrl="https://onlinelibrary.wiley.com/journal/13996576?af=R"/>
+            <outline type="rss" text="The anesthesia consultant" title="The anesthesia consultant" xmlUrl="http://theanesthesiaconsultant.com/feed/" htmlUrl="https://theanesthesiaconsultant.com/"/>
+            <outline type="rss" text="Latest Results" title="Latest Results" xmlUrl="https://link.springer.com/search.rss?query=&amp;search-within=Journal&amp;facet-journal-id=540" htmlUrl="http://link.springer.com"/>
+            <outline type="rss" text="犬好き麻酔科医ブログ" title="犬好き麻酔科医ブログ" xmlUrl="http://rssblog.ameba.jp/caburiollet/rss20.xml" htmlUrl="https://ameblo.jp/caburiollet/"/>
+            <outline type="rss" text="ヨネログスマイル" title="ヨネログスマイル" xmlUrl="http://rssblog.ameba.jp/rikity/rss20.xml" htmlUrl="https://ameblo.jp/rikity/"/>
+            <outline type="rss" text="麻酔科勤務医のお勉強日記" title="麻酔科勤務医のお勉強日記" xmlUrl="https://knight1112jp.seesaa.net/index.rdf" htmlUrl="https://knight1112jp.seesaa.net/"/>
+            <outline type="rss" text="ScienceDirect Publication: Journal of Clinical Anesthesia" title="ScienceDirect Publication: Journal of Clinical Anesthesia" xmlUrl="http://rss.sciencedirect.com/publication/science/09528180" htmlUrl="https://www.sciencedirect.com/journal/journal-of-clinical-anesthesia"/>
+        </outline>
+        <outline text="Books" title="Books">
+            <outline type="rss" text="わたしが知らないスゴ本は、きっとあなたが読んでいる" title="わたしが知らないスゴ本は、きっとあなたが読んでいる" xmlUrl="http://dain.cocolog-nifty.com/myblog/atom.xml" htmlUrl="https://dain.cocolog-nifty.com/myblog/"/>
+        </outline>
+        <outline text="ishikitaikaikei" title="ishikitaikaikei"/>
+        <outline text="PC" title="PC">
+            <outline type="rss" text="" title="" xmlUrl="https://harumi.land/nittsui/feed/" htmlUrl="https://harumi.land/nittsui"/>
+            <outline type="rss" text="窓の杜" title="窓の杜" xmlUrl="https://forest.watch.impress.co.jp/data/rss/1.0/wf/feed.rdf" htmlUrl="https://forest.watch.impress.co.jp"/>
+            <outline type="rss" text="市況かぶ全力２階建" title="市況かぶ全力２階建" xmlUrl="http://kabumatome.doorblog.jp/index.rdf" htmlUrl="https://kabumatome.doorblog.jp/"/>
+            <outline type="rss" text="ジコログ" title="ジコログ" xmlUrl="https://self-development.info/feed/" htmlUrl="https://self-development.info"/>
+            <outline type="rss" text="ちもろぐ" title="ちもろぐ" xmlUrl="http://chimolog.co/feed" htmlUrl="https://chimolog.co"/>
+        </outline>
+        <outline text="security" title="security"/>
+        <outline text="Medical" title="Medical">
+            <outline type="rss" text="BioToday.com [新着ニュース]" title="BioToday.com [新着ニュース]" xmlUrl="http://feeds.feedburner.com/biotoday" htmlUrl="http://www.biotoday.com/news.cfm"/>
+            <outline type="rss" text="心房細動な日々" title="心房細動な日々" xmlUrl="http://dobashin.exblog.jp/index.xml" htmlUrl="http://dobashin.exblog.jp"/>
+            <outline type="rss" text="葦の髄から循環器の世界をのぞく" title="葦の髄から循環器の世界をのぞく" xmlUrl="http://blog.livedoor.jp/cardiology_reed/index.rdf" htmlUrl="http://blog.livedoor.jp/cardiology_reed/"/>
+            <outline type="rss" text="Anatomy" title="Anatomy" xmlUrl="https://anatomy.med.gunma-u.ac.jp/?feed=rss2" htmlUrl="https://anatomy.med.gunma-u.ac.jp"/>
+            <outline type="rss" text="医学事始 いがくことはじめ" title="医学事始 いがくことはじめ" xmlUrl="http://igakukotohajime.com/feed/" htmlUrl="http://igakukotohajime.com"/>
+            <outline type="rss" text="葦の髄から覗く循環器の世界" title="葦の髄から覗く循環器の世界" xmlUrl="http://rssblog.ameba.jp/ew-13741374/rss20.xml" htmlUrl="https://ameblo.jp/ew-13741374/"/>
+            <outline type="rss" text="メディカルオンライン 医療裁判紹介" title="メディカルオンライン 医療裁判紹介" xmlUrl="http://www.medicalonline.jp/rss/newcase.atom"/>
+            <outline type="rss" text="QLifePro" title="QLifePro" xmlUrl="http://www.qlifepro.com/feed" htmlUrl="https://www.qlifepro.com"/>
+            <outline type="rss" text="論文ウォッチ | AASJホームページ" title="論文ウォッチ | AASJホームページ" xmlUrl="http://aasj.jp/category/news/watch/feed" htmlUrl="https://aasj.jp"/>
+            <outline type="rss" text="呼吸器内科医" title="呼吸器内科医" xmlUrl="http://pulmonary.exblog.jp/atom.xml" htmlUrl="http://pulmonary.exblog.jp"/>
+            <outline type="rss" text="GomerBlog" title="GomerBlog" xmlUrl="http://www.gomerblog.com/feed/" htmlUrl="https://gomerblog.com/"/>
+            <outline type="rss" text="イケナイCE（臨床工学技士）" title="イケナイCE（臨床工学技士）" xmlUrl="http://suwarukamo.blog.fc2.com/?xml" htmlUrl="http://suwarukamo.blog.fc2.com/"/>
+            <outline type="rss" text="Dr.内野のおすすめ文献紹介" title="Dr.内野のおすすめ文献紹介" xmlUrl="https://druchino.hatenablog.com/rss" htmlUrl="https://druchino.hatenablog.com/"/>
+            <outline type="rss" text="Eng&quot;R&quot;ishman in New York" title="Eng&quot;R&quot;ishman in New York" xmlUrl="http://nantaro.blogspot.com/feeds/posts/default" htmlUrl="http://nantaro.blogspot.com/"/>
+        </outline>
+        <outline text="Automotive" title="Automotive">
+            <outline type="rss" text="Autoblog News" title="Autoblog News" xmlUrl="http://www.autoblog.com/rss.xml" htmlUrl="https://www.autoblog.com"/>
+        </outline>
+        <outline text="Society" title="Society">
+            <outline type="rss" text="山本一郎（やまもといちろう）" title="山本一郎（やまもといちろう）" xmlUrl="https://note.mu/kirik/rss" htmlUrl="https://note.com/kirik"/>
+            <outline type="rss" text="グローバルマクロ・リサーチ・インスティテュート" title="グローバルマクロ・リサーチ・インスティテュート" xmlUrl="http://www.globalmacroresearch.org/jp/feed" htmlUrl="https://www.globalmacroresearch.org/jp"/>
+        </outline>
+    </body>
+</opml>
