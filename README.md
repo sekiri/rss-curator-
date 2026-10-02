@@ -59,7 +59,45 @@ uv run python -m src.main --prune
 uv run python -m src.main --generate
 ```
 
-### 4. テストの実行
+### 4. 日常の更新方法（手動更新 & GitHub プッシュ）
+
+フィードの巡回・スコアリング・XML生成・GitHubへの自動プッシュをワンクリックで実行できます：
+
+- **バッチファイル（Windows エクスプローラーからダブルクリック）**:
+  `update.bat`
+- **PowerShell からの実行**:
+  ```powershell
+  .\update.ps1
+  ```
+- **CLI から直接実行**:
+  ```bash
+  uv run python -m src.main --run --push
+  ```
+
+---
+
+### 5. Windows タスクスケジューラによる完全自動化
+
+毎朝決まった時刻にバックグラウンドで自動巡回＆GitHubプッシュを行い、Feedlyに最新記事を届ける設定が可能です（ポップアップ画面なしで静かに実行されます）。
+
+```powershell
+# 毎朝 07:00 に自動実行するタスクを登録（デフォルト）
+.\setup_scheduler.ps1
+
+# 実行時刻を指定して登録（例: 毎朝 08:30）
+.\setup_scheduler.ps1 -Time "08:30"
+
+# 登録状況・最終実行日時の確認
+.\setup_scheduler.ps1 -Status
+
+# 自動実行の解除（タスク削除）
+.\setup_scheduler.ps1 -Remove
+```
+※実行ログは `data/scheduler.log` に自動保存されます。
+
+---
+
+### 6. テストの実行
 ```bash
 uv run python -m unittest discover -s tests
 ```

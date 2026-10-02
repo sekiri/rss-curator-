@@ -2,6 +2,7 @@ import argparse
 import logging
 import sys
 from pathlib import Path
+from typing import Optional
 
 from src.config import (
     BOOKMARKS_PATH,
@@ -26,6 +27,47 @@ logging.basicConfig(
 logger = logging.getLogger("rss-curator")
 
 
+def push_to_github(commit_message: Optional[str] = None) -> bool:
+    """docs/curated.xml および data/curator.db をステージング・コミットし、GitHub にプッシュする。"""
+    import subprocess
+    from datetime import datetime
+
+    logger.info("--- Step 6: Pushing Updates to GitHub ---")
+    try:
+        # 変更があるか確認
+        res = subprocess.run(
+            ["git", "status", "--porcelain", "docs/curated.xml", "data/curator.db"],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        if not res.stdout.strip():
+            logger.info("No changes detected in curated.xml or database. Push skipped.")
+            return True
+
+        if not commit_message:
+            now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            commit_message = f"Auto-update curated feed ({now_str})"
+
+        logger.info("Staging docs/curated.xml and data/curator.db...")
+        subprocess.run(["git", "add", "docs/curated.xml", "data/curator.db"], check=True)
+
+        logger.info(f"Committing changes: {commit_message}")
+        subprocess.run(["git", "commit", "-m", commit_message], check=True)
+
+        logger.info("Pushing to origin main...")
+        subprocess.run(["git", "push", "origin", "main"], check=True)
+
+        logger.info("Successfully pushed updated feed to GitHub!")
+        return True
+    except subprocess.CalledProcessError as e:
+        logger.error(f"Git operation failed: {e}")
+        return False
+    except Exception as e:
+        logger.error(f"Unexpected error during git push: {e}")
+        return False
+
+
 def run_pipeline(
     db_path: Path | str = DB_PATH,
     bookmarks_path: Path | str = BOOKMARKS_PATH,
@@ -33,6 +75,7 @@ def run_pipeline(
     output_path: Path | str = OUTPUT_FEED_PATH,
     threshold: float = SIMILARITY_THRESHOLD,
     rescore_all: bool = False,
+    push: bool = False,
 ) -> None:
     """フルパイプラインを実行する。"""
     logger.info("==========================================")
@@ -75,6 +118,10 @@ def run_pipeline(
     logger.info("--- Step 5: Generating Curated RSS XML ---")
     generated_path = generate_rss_feed(db_path=db_path, output_path=output_path)
     logger.info(f"Curated feed output: {generated_path}")
+
+    # 8. GitHub へのプッシュ（指定された場合）
+    if push:
+        push_to_github()
 
     logger.info("==========================================")
     logger.info("Pipeline Execution Completed Successfully!")
@@ -126,6 +173,11 @@ def main() -> None:
         help="Generate curated.xml RSS feed",
     )
     parser.add_argument(
+        "--push",
+        action="store_true",
+        help="Commit and push updated feed to GitHub",
+    )
+    parser.add_argument(
         "--run",
         action="store_true",
         help="Run full end-to-end curation pipeline",
@@ -146,11 +198,12 @@ def main() -> None:
             args.rescore,
             args.prune,
             args.generate,
+            args.push,
         ]
     )
 
     if args.run or not has_specific_flag:
-        run_pipeline(threshold=args.threshold, rescore_all=args.rescore)
+        run_pipeline(threshold=args.threshold, rescore_all=args.rescore, push=args.push)
         return
 
     if args.import_opml:
@@ -173,6 +226,9 @@ def main() -> None:
 
     if args.generate:
         generate_rss_feed(db_path=DB_PATH, output_path=OUTPUT_FEED_PATH)
+
+    if args.push:
+        push_to_github()
 
 
 if __name__ == "__main__":
