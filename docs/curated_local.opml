@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="2.0">
+  <head>
+    <title>Personal Tailored RSS Subscriptions (Local File)</title>
+  </head>
+  <body>
+    <outline text="Personal Tailored Feed (Local)" 
+             title="Personal Tailored Feed (Local)" 
+             type="rss" 
+             xmlUrl="file:///D:/WorkingFolder/Antigravity/docs/curated.xml" 
+             htmlUrl="https://sekiri.github.io/rss-curator-/" />
+  </body>
+</opml>
