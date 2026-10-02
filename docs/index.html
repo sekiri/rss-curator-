@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Tailored RSS Feed</title>
+  <!-- RSS自動検出タグ（Feedly等が自動認識するためのタグ） -->
+  <link rel="alternate" type="application/rss+xml" title="Personal Tailored Feed" href="curated.xml" />
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 680px; margin: 60px auto; padding: 0 20px; line-height: 1.6; color: #24292f; }
+    h1 { color: #0969da; }
+    .card { background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 8px; padding: 24px; margin: 28px 0; }
+    .btn { display: inline-block; background: #2da44e; color: #fff; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold; }
+    .feed-url { background: #eaeef2; padding: 8px 12px; border-radius: 6px; font-family: monospace; display: inline-block; margin-top: 8px; word-break: break-all; }
+  </style>
+</head>
+<body>
+  <h1>Personal Tailored RSS Feed</h1>
+  <p>ローカル AI（Embedding ベクトル類似度）によって自動キュレーションされた RSS フィードです。</p>
+  <div class="card">
+    <h2>RSS フィードの購読</h2>
+    <p>以下のボタンまたは URL を Feedly 等の RSS リーダーに登録してください：</p>
+    <a class="btn" href="curated.xml">curated.xml を開く</a>
+    <div style="margin-top: 16px;">
+      <small style="color: #57606a; display: block;">直接指定用フィード URL：</small>
+      <span class="feed-url" id="feed-url">curated.xml</span>
+    </div>
+  </div>
+  <script>
+    const currentUrl = window.location.href.split('?')[0].split('#')[0];
+    const feedUrl = currentUrl.endsWith('/') ? currentUrl + 'curated.xml' : currentUrl.replace(/index\.html$/, '') + (currentUrl.endsWith('/') ? '' : '/') + 'curated.xml';
+    document.getElementById('feed-url').textContent = feedUrl;
+  </script>
+</body>
+</html>
